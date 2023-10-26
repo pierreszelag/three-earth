@@ -9,6 +9,7 @@ import { EarthModel } from './earthModel'
 const EarthObject= () => {
     const ref = useRef<any>();
     const earthRef = useRef<any>();
+    const starsRef = useRef<any>();
     const tl = useRef<any>();
 
     const scroll = useScroll();
@@ -41,18 +42,18 @@ const EarthObject= () => {
           ref.current.position,
           {
             duration: 1,
-            x: 0,
-            y: 0,
-            z: -5
+            x: 3,
+            y: 3,
+            z: 3
           },
           2
         );
 
-        // tl.current.to(
-        //     ref.current.rotation,
-        //     { duration: 3, x: 0, y: -Math.PI / 6, z: 0 },
-        //     0
-        // );
+        tl.current.to(
+          starsRef.current.rotation,
+            { duration: 3, x: 0, y: Math.PI / 6, z: 0 },
+            0
+        );
 
     });
     
@@ -61,19 +62,21 @@ const EarthObject= () => {
         <group ref={earthRef}>
           <EarthModel />
         </group>
-        <Sphere>
-            <sphereGeometry args={[10.012, 64, 64]} />
-            <meshStandardMaterial transparent={true} opacity={0.4} color="#519bbd" />
-        </Sphere>
-        <Points positions={sphere1} stride={3} frustumCulled={false}>
-            <PointMaterial transparent color="#ffa0e0" size={6} sizeAttenuation={true} depthWrite={false} />
-        </Points>
-        <Points positions={sphere2} stride={3} frustumCulled={false}>
-            <PointMaterial transparent color="#ffa0e0" size={3} sizeAttenuation={true} depthWrite={false} />
-        </Points>
-        <Points positions={sphere3} stride={3} frustumCulled={false}>
-            <PointMaterial transparent color="#ffa0e0" size={1} sizeAttenuation={true} depthWrite={false} />
-        </Points>
+        <group ref={starsRef}>
+          <Sphere>
+              <sphereGeometry args={[10.012, 64, 64]} />
+              <meshStandardMaterial transparent={true} opacity={0.4} color="#519bbd" />
+          </Sphere>
+          <Points positions={sphere1} stride={3} frustumCulled={false}>
+              <PointMaterial transparent color="#ffa0e0" size={6} sizeAttenuation={true} depthWrite={false} />
+          </Points>
+          <Points positions={sphere2} stride={3} frustumCulled={false}>
+              <PointMaterial transparent color="#ffa0e0" size={3} sizeAttenuation={true} depthWrite={false} />
+          </Points>
+          <Points positions={sphere3} stride={3} frustumCulled={false}>
+              <PointMaterial transparent color="#ffa0e0" size={1} sizeAttenuation={true} depthWrite={false} />
+          </Points>
+        </group>
     </group>
   );
 }
