@@ -5,7 +5,7 @@ import EarthScene from './components/earthScene';
 
 const App = () => {
   return (
-    <div className='earth-scene'>
+    <div style={{ width: "100vw", height: "100vh" }}>
       <Canvas camera={{ position: [10, 10, 10], near: 0.025 }}>
         <EarthScene />
       </Canvas>
